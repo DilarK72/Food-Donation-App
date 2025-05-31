@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Donate Food</title>
+    <!--jquery-->
+    <script src="js/lib/jquery-2.1.4.js"></script>
+    <!--jquery mobile-->
+    <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+    <!--jquery mobile styles-->
+    <link rel="stylesheet" href="css/lib/jquery.mobile-1.4.5.css" />
+    <!--jquery validation-->
+    <script src="js/lib/jquery.validate.js"></script>
+    <!--bootstrap-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <!--bootstrap js-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--<script src="js/database.js"></script>-->
+    <!-- <script src="js/DAL.js"></script> -->
+    <script src="js/facade.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/global.js"></script>
+    <!-- <script src="js/food.js"></script> -->
+    <!-- <script src="js/geo.js"></script> -->
+    <script src="js/donationManager.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+   
+
+<!-- Register Page -->
+<div data-role="page" id="registerPage">
+  <div data-role="header" class="head">
+      <h1>Register</h1>
+  </div>
+
+  <div role="main" class="ui-content">
+      <form id="registerForm" name="registerForm" > 
+          <label for="newUsername">Username:</label>
+          <input type="text" id="newUsername" name="newUsername"  >
+          <label for="emailUser">Email:</label>
+          <input type="email" id="emailUser" name="emailUser" >
+          <label for="newPassword">Password:</label>
+          <input type="password" id="newPassword" name="newPassword" >
+          <label for="confirmPassword">Confirm Password:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" >
+          <button type="submit">Get Started</button>
+      </form>
+  </div>
+</div>
+
+    <!-- Home Page -->
+    <div data-role="page" id="home">
+      <div data-role="header" class="head">
+         
+        <h1>Welcome <span id="showUser"></span></h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                class="ui-btn-active ui-state-persist"> 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div data-role="content">
+        <div class="card">
+          <div class="card-body">
+        <img src="img/food donation.jpg" alt="Food Donation" id="imgHome" />
+        <p>
+          Our mission is to reduce food waste and facilitate food donations to
+          those in need.
+        </p>
+        <p>
+          Did you know globally, around 931 million tonnes of food go to waste
+          each year, with 61% coming from households?
+        </p>
+        <p>Together, we can make a difference!</p>
+        <a href="#donate" class="ui-btn ui-btn-b ui-corner-all"
+          >Start Donating</a>
+        <a href="#calculator" class="ui-btn ui-btn-b ui-corner-all"
+          >Food Waste Calculator</a>
+        <a href="#map" class="ui-btn ui-btn-b ui-corner-all"
+          >Find Donation Centers</a>
+        
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Form Page -->
+    <div data-role="page" id="donate">
+      <div data-role="header" class="head">
+        <h1>Donate Food</h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home"> 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate" class="ui-btn-active ui-state-persist">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <form id="frmDonate" name="frmDonate">
+          <div class="donation-item">
+            <label for="itemName">Item Name:</label>
+            <input type="text" id="itemName" name="itemName" required />
+          </div>
+          <div class="donation-item">
+            <label for="quantity">Quantity:</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              required
+            />
+          </div>
+          <div class="donation-item">
+            <label for="expirationDate">Expiration Date:</label>
+            <input
+              type="date"
+              id="expirationDate"
+              name="expirationDate"
+              required
+            />
+          </div>
+          <div class="donation-item">
+            <label for="category">Category:</label>
+            <select id="category" name="category" data-native-menu="false">
+              <option value="perishable">Perishable</option>
+              <option value="non-perishable">Non-Perishable</option>
+            </select>
+          </div>
+          <div class="donation-item">
+            <label for="condition">Condition:</label>
+            <select id="condition" name="condition" data-native-menu="false">
+              <option value="new">New</option>
+              <option value="open">Open but Unused</option>
+            </select>
+          </div>
+          <div class="donation-item">
+            <label for="pickupLocation">Pickup Location:</label>
+            <input type="text" id="pickupLocation" name="pickupLocation" />
+          </div>
+          <div class="donation-item">
+            <label for="preferredPickupTime">Preferred Pickup Time:</label>
+            <input
+              type="datetime-local"
+              id="preferredPickupTime"
+              name="preferredPickupTime"
+            />
+          </div>
+          <div class="donation-item">
+            <label for="specialInstructions">Special Instructions:</label>
+            <textarea
+              id="specialInstructions"
+              name="specialInstructions"
+            ></textarea>
+          </div>
+          <div class="donation-item">
+            <label for="allergenInformation">Allergen Information:</label><br />
+            <input
+              type="checkbox"
+              id="allergenDairy"
+              name="allergenDairy"
+              value="dairy"
+            />
+            <label for="allergenDairy">Dairy</label>
+            <input
+              type="checkbox"
+              id="allergenNuts"
+              name="allergenNuts"
+              value="nuts"
+            />
+            <label for="allergenNuts">Nuts</label>
+          </div>
+          <div class="donation-item">
+            <label for="photoUpload">Photo Upload:</label>
+            <input
+              type="file"
+              id="photoUpload"
+              name="photoUpload"
+              accept="image/*"
+            />
+            <button id="takePhotoBtn">Take Photo</button>
+          </div>
+          <div class="donor-info">
+            <div class="donation-item">
+              <label for="donorName">Your Name:</label>
+              <input type="text" id="donorName" name="donorName" required />
+            </div>
+            <div class="donation-item">
+              <label for="phone">Phone Number:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                pattern="[0-9]{10}"
+                required
+              />
+            </div>
+            <div class="donation-item">
+              <label for="email">Email Address:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="donation-item">
+              <label for="address">Address:</label>
+              <input type="text" id="address" name="address" />
+            </div>
+          </div>
+          <input
+            type="submit"
+            value="Donate"
+            id="submit"
+            name="submit"
+            class="ui-btn ui-btn-b ui-corner-all"
+          />
+        </form>
+      </div>
+    </div>
+
+    <!-- Donation History Page -->
+    <div data-role="page" id="history">
+      <div data-role="header" class="head">
+        <h1>Donation History</h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                > 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate" >
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history" class="ui-btn-active ui-state-persist"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <table
+          data-role="table"
+          id="donationTable"
+          data-mode="columntoggle"
+          class="ui-responsive table-stroke"
+        >
+        <thead>
+          <tr>
+              <th class="vertical-header" data-priority="persist">Donor Name</th>
+              <th class="vertical-header" data-priority="1">Item Name</th>
+              <th class="vertical-header" data-priority="2">Quantity</th>
+              <th class="vertical-header" data-priority="3">Date Donated</th>
+               <th class="vertical-header" data-priority="4">Actions</th>
+          </tr>
+      </thead>
+      
+
+          <tbody id="donationList" data-role="listview" class="ui-listview-inset"></tbody>
+          
+        </table>
+      </div>
+    </div>
+
+    <!-- Recipient Page -->
+    <div data-role="page" id="recipient">
+      <div data-role="header" class="head">
+        <h1>Our Recipients</h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                 > 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient" class="ui-btn-active ui-state-persist"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <h2>Recipient Spotlight: Maria's Story</h2>
+        <div class="card">
+          <div class="card-body">
+        <img src="img/Maria.jpg" alt="Maria and her family" id="imgrecipient" />
+        </div>
+        </div>
+        <p>
+          <strong>Before Donations:</strong> Maria, a single mother of three,
+          struggled to provide nutritious meals for her children due to
+          financial hardships.
+        </p>
+        <p>
+          <strong>After Receiving Donations:</strong> Thanks to the generous
+          food donations, Maria's family now enjoys a variety of healthy foods.
+          The children are doing better in school, and Maria has started a small
+          home-based business to support her family.
+        </p>
+        <blockquote>
+          <p>
+            "The food donations have been a lifeline for us. It's more than just
+            the meals; it's the hope and support that come with them. We are
+            deeply grateful." - Maria
+          </p>
+        </blockquote>
+        <p>
+          <strong>Impact Achieved:</strong> With the help of donors like you,
+          over 500 families in Maria's community have received essential food
+          support this year.
+        </p>
+        <a href="#donate" class="ui-btn ui-btn-b ui-corner-all"
+         >Get Involved and make a difference today!</a
+        >
+      </div>
+    </div>
+
+    <!-- About Page -->
+    <div data-role="page" id="about">
+      <div data-role="header" class="head">
+        <h1>About Us</h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                 > 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about" class="ui-btn-active ui-state-persist"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <div class="card">
+          <div class="card-body">
+            <h2>Meet Our Team</h2>
+            <img
+              src="img/hand gathered.jpeg"
+              alt="Group Photo of the Development Team"
+              id="imgTeam"
+            />
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h2>Our Mission</h2>
+            <p>
+              "To combat food waste and hunger, one app at a time. We believe in
+              a world where every meal counts, and technology is the key to
+              making that happen."
+            </p>
+           
+            <h2>The Journey</h2>
+            <p>
+              It all started with a fridge full of leftovers and a desire to
+              make a difference. From coding marathons to community feedback
+              sessions, our journey has been one of perseverance and discovery.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <p>
+              <strong>Tajeshvir Singh</strong>,
+              <em>tajeshvirsingh8445@conestogac.on.ca</em>
+              <em>8838445</em>
+              <a href="mailto:tajeshvirsingh8445@conestogac.on.ca">Contact</a>
+            </p>
+            <p>
+              <strong>Diego Ramos Choque</strong>,
+              <em>dramoschoque2254@@conestogac.on.ca</em>
+              <em>dramoschoque2254@conestogac.on.ca</em>
+              <a href="mailto:dramoschoque2254@conestogac.on.ca">Contact</a>
+            </p>
+            <p>
+              <strong>Ranjyot Singh</strong>,
+              <em>@conestogac.on.ca</em>
+              <em>xxxxxx</em>
+              <a href="mailto:@conestogac.on.ca">Contact</a>
+            </p>
+            <p>
+              <strong>Faizan Subhani</strong>,
+              <em>@conestogac.on.ca</em>
+              <em>xxxxxx</em>
+              <a href="mailto:@conestogac.on.ca">Contact</a>
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <blockquote>
+              <p>
+                "Seeing the app in action, transforming surplus food into meals
+                for families, has been one of the most rewarding experiences." -
+                Team Members
+              </p>
+            </blockquote>
+          </div>
+        </div>
+
+        
+        <a href="#donate" class="ui-btn ui-btn-b ui-corner-all"  
+          ><p>Get Involved and be a part of 
+            the solution. </p></a
+        >
+      </div>
+    </div>
+
+    <!-- Food Waste Calculator Page -->
+    <div data-role="page" id="calculator">
+      <div data-role="header" class="head">
+        <h1> Waste Calculator</h1>
+                <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                 > 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator" class="ui-btn-active ui-state-persist"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">
+        <h2>Calculate Your Food Waste</h2>
+        <p>
+          Did you know that the average American wastes 219 pounds of food each
+          year? Use our calculator to estimate your food waste and learn how you
+          can reduce it.
+        </p>
+        <form id="frmCalculate" name="frmCalculate">
+        <div class="calculator">
+          <label for="foodType">Food Type:</label>
+          <select id="foodType">
+            <option value="fruit">Fruit</option>
+            <option value="vegetable">Vegetable</option>
+            <option value="grain">Grain</option>
+            <option value="dairy">Dairy</option>
+            <option value="protein">Protein</option>
+            <option value="other">Other</option>
+          </select>
+          <label for="foodQuantity">Quantity (lbs):</label>
+          <input
+            type="number"
+            id="foodQuantity"
+            name="foodQuantity"
+             
+          />
+          <input
+            type="submit"
+            value="Calculate"
+            id="calculate"
+            name="calculate"
+             
+            class="ui-btn ui-btn-b ui-corner-all"
+          />
+        </div>
+      </form>
+        <div class="results">
+          <h3>Your Food Waste:</h3>
+          <p>You waste <span id="foodWaste"></span> pounds of food annually.</p>
+          <p>
+            To reduce your food waste, consider the following tips:
+            <ul>
+              <li>Shop Smart: Plan your meals and make a shopping list to avoid buying more than you need. Frequent, smaller shopping trips can help ensure that you use all the food you buy.</li>
+              <li>Store Food Correctly: Proper storage can greatly extend the life of your food. For example, keep potatoes, tomatoes, garlic, cucumbers, and onions at room temperature, and separate ethylene-producing fruits like bananas and avocados from other produce to prevent premature spoilage.</li>
+              <li>Learn to Preserve: Pickling, fermenting, and freezing are great ways to extend the shelf life of foods. These methods have been used for thousands of years and can help you save food that might otherwise go to waste.</li>
+              <li>Take Inventory: Regularly check what you have in your pantry, fridge, and freezer to avoid overbuying and to use up items before they expire.</li>
+              <li>Create a Meal Plan: Having a meal plan helps you use what you have and reduces the chances of food going unused and eventually wasted.</li>
+              <li>Use Leftovers Creatively: Think of ways to repurpose leftovers into new meals. For example, use leftover vegetables in a stir-fry or soup.</li>
+              <li>Compost: Composting inedible scraps turns waste into a resource and reduces the amount of garbage sent to landfills.</li>
+              <li>Educate Yourself and Others: Understanding the impact of food waste and sharing knowledge can help create a community that values and practices waste reduction.</li>
+            </ul>
+          </p>
+        </div>
+      </div>
+      
+    </div>
+
+    <!--Map Page-->
+    <div data-role="page" id="map">
+      <div data-role="header" class="head">
+        <h1>Find Donation Centers</h1>
+        <div id="navbar-container" data-role="navbar" data-iconpos="top">
+          <ul>
+            <li>
+              <div>
+                <a href="#home" 
+                 > 
+                 <img src="img/home.png" alt="home icon" style="height: 24px; width: auto;"> Home</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#donate">
+                 <img src="img/food-donation.png" alt="food-donation icon" style="height: 24px; width: auto;"> Donate</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#history"> <img src="img/history-book.png" alt="history icon" style="height: 24px; width: auto;"> History</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#recipient"> <img src="img/parcel.png" alt="recipient icon" style="height: 24px; width: auto;"> Recipients</a>
+              </div>
+            </li>
+           
+            <li>
+              <div>
+                <a href="#calculator"> <img src="img/calculator.png" alt="calculator icon" style="height: 24px; width: auto;"> Calculator</a>
+              </div>
+            </li>
+            <li>
+              <div>
+                <a href="#map" class="ui-btn-active ui-state-persist"> <img src="img/location-pin.png" alt="map icon" style="height: 24px; width: auto;"> Map</a>
+              </div>
+            </li>
+            
+          </ul>
+          <ul>
+            <li >
+              <div class="aboutNav">
+              <a href="#about"> <img src="img/about.png" alt="about ico" style="height: 24px; width: auto;"> About</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div data-role="content">        
+       <div id="map-canvas">
+          <div class="card-body">
+            <h2>Find Donation Centers Near You</h2>
+            <p>
+              Use the map below to locate donation centers in your area. Click on
+              the markers for more information about each center.
+            </p>
+            <div id="map">
+              <iframe class="map-frame" src="https://www.google.com/maps/d/embed?mid=1SUCNsVqYT75y_JnJPmttvD2zAOVtwg0&ehbc=2E312F" width="740" height="700"></iframe>
+            </div>
+
+            <p>Find Donation Places to visit and make your honest contribution:</p>
+            <ul>
+              <p>
+                <strong>
+                  <a href="https://www.thefoodbank.ca/">The Food Bank Waterloo Region</a>
+                  <em>50 Alpine Ct, Kitchener, ON N2E 2M7</em>
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  <a href="https://211ontario.ca/service/73442302/community-fridge-kw-community-fridge-kw/">Community Fridge KWt</a>
+                  <em>300 King St E, Kitchener, ON N2H 2V5</em>
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  <a href="https://www.rayofhope.net/">Ray of Hope Inc</a>
+                  <em>659 King St E, Kitchener, ON N2G 2M4</em>
+                </strong>
+              </p>
+              <p>
+                <strong>
+                  <a href="https://www.salvationarmy.ca/">The Salvation Army</a>
+                  <em>75 Tillsley Dr, Kitchener, ON N2E 1W2</em>
+                </strong>
+              </p>
+          </div>
+       </div>
+      </div>
+
+    </div>
+
+  </body>
+
+
+</html>
